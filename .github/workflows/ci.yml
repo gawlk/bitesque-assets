@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  workflow_dispatch: # On manual trigger
+  schedule:
+    - cron: "55 23 * * *" # Every day at midnight
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: denoland/setup-deno@v1
+
+      - name: Liquidity
+        run: deno task liquidity
+
+      - name: Git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "assets: update"
+          git push
