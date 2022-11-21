@@ -16,7 +16,7 @@ try {
 
 try {
   const result = await fetch(
-    `http://localhost:8000/bitcoin/liquidity`,
+    `https://bittemp-back.deno.dev/bitcoin/liquidity`,
   );
 
   const date = new Date();
